@@ -45,9 +45,9 @@ export async function sendMail({ reciverMail, emailType, userId }: sendMailProp)
         emailType == "VERIFY" ? "verfiy your account" : "reset your password"
       }</p><div>or click on the link :<a href=" ${
         process.env.DOMAIN
-      }/verifyProcess?token=${hashedToken}"> ${
+      }/${emailType == "VERIFY" ? "verifyProcess" : "ResetPassword" }?token=${hashedToken}"> ${
         process.env.DOMAIN
-      }/verifyProcess?token=${hashedToken}</a></div>`,
+      }/${emailType == "VERIFY" ? "verifyProcess" : "ResetPassword" }?token=${hashedToken}</a></div>`,
     };
 
     const mailResponse = await transport.sendMail(mailOption);

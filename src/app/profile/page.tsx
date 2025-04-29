@@ -19,8 +19,10 @@ function Profile() {
     try {
       await axios.get("/api/users/logout");
       router.push("/login");
-    } catch (error: any) {
-      console.log("logout::", error);
+    } catch (error) {
+      if(axios.isAxiosError(error) && error.response){
+        console.log("logout::", error);
+      }
     }
   };
 

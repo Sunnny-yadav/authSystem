@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 
@@ -63,4 +63,11 @@ const VerificationPending = () => {
   );
 };
 
-export default VerificationPending;
+// Add this wrapper component
+export default function Verify() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerificationPending />
+    </Suspense>
+  );
+}

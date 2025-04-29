@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ChangeEvent, FormEvent, useState, useEffect } from "react";
+import { ChangeEvent, FormEvent, useState, useEffect, Suspense } from "react";
 
 interface ResetPasswordForm {
   newPassword: string;
@@ -114,4 +114,11 @@ function ResetPasswordPage() {
   );
 }
 
-export default ResetPasswordPage;
+// Add this wrapper component
+export default function ResetPassword() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetPasswordPage />
+    </Suspense>
+  );
+}

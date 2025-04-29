@@ -23,11 +23,20 @@ export async function GET(request: NextRequest){
             data:userData
         });
         
-    } catch (error: any) {
-        return NextResponse.json({
-            error:error.message || "An error occured while executing the get function for fetching user Profile"
-        })
-        
-    }
+    } catch (error) {
+        console.error("me route error:", error);
+      
+        let errorMessage = "An error occurred while fetching user data operation";
+      
+        if (error instanceof Error) {
+          errorMessage = error.message;
+        }
+      
+        return NextResponse.json(
+          { error: errorMessage },
+          { status: 500 }
+        );
+      }
+      
 }
 

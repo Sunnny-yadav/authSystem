@@ -4,10 +4,6 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 
-interface VerificationSuccessProps {
-  token?: string;
-}
-
 const VerificationSuccess = () => {
 
   const [token , settoken] = useState("")
@@ -26,10 +22,10 @@ const VerificationSuccess = () => {
         setMessage('Verification failed. The link may be expired or invalid.');
       }
 
-    } catch (error: any) {
+    } catch (error) {
       setVerificationStatus('error');
       setMessage('An error occurred during verification. Please try again.');
-      console.log(error.response.data.error)
+      console.log(error)
     }
   };
 
@@ -37,7 +33,7 @@ const VerificationSuccess = () => {
     const urlParams = window.location.search;
     const tokenVal = urlParams.split("=")[1]
     settoken(tokenVal)
-  },[])
+  },[token])
 
   useEffect(() => {
     if(token.length > 0){

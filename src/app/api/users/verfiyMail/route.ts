@@ -30,9 +30,18 @@ export async function POST(request: NextRequest){
             success: true
         })
 
-    } catch (error: any) {
+    } catch (error) {
+        console.log("Error in backend");
+      
+        let errorMessage = "An error occurred during email verification";
+        if (error instanceof Error) {
+          errorMessage = error.message;
+        }
+      
         return NextResponse.json(
-            {error:error.message || "An error occured while verifying the mail"}
-        )
-    }
+          { error: errorMessage },
+          { status: 500 }
+        );
+      }
+      
 }

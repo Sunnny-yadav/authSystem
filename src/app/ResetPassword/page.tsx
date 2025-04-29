@@ -50,10 +50,16 @@ function ResetPasswordPage() {
       setTimeout(() => {
         router.push("/login");
       }, 2000); // wait 2s then redirect to login
-    } catch (error: any) {
-      console.log("handleSubmit:: reset-password::", error.response.data.error);
-      setMessage("Something went wrong. Please try again.");
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        console.log("handleSubmit:: forgot-password::", error.response.data.error);
+        setMessage(error.response.data.error);
+      } else {
+        console.error("Unexpected error:", error);
+        setMessage("Something went wrong. Please try again later.");
+      }
     }
+    
   };
 
   return (

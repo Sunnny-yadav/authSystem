@@ -3,9 +3,13 @@
 import React from 'react';
 import Image from 'next/image';
 
+interface emailVerifyProp {
+  params: {
+    email: string;
+  };
+}
 
-
-const VerificationPending = ({params}: any) => {
+const VerificationPending = ({params}:emailVerifyProp ) => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-black p-4">
       <div className="flex w-full max-w-4xl flex-col md:flex-row items-center justify-between">

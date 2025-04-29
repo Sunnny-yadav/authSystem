@@ -36,10 +36,16 @@ function ForgotPasswordPage() {
         setMessage(`password reset link has been sent to your email :${formData.email}`);   
       }
 
-    } catch (error: any) {
-      console.log("handleSubmit:: forgot-password::", error.response.data.error);
-      setMessage(error.response.data.error);
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        console.log("handleSubmit:: forgot-password::", error.response.data.error);
+        setMessage(error.response.data.error);
+      } else {
+        console.error("Unexpected error:", error);
+        setMessage("Something went wrong. Please try again later.");
+      }
     }
+    
   };
 
   return (

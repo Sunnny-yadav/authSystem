@@ -53,15 +53,21 @@ export async function POST(request: NextRequest) {
     response.cookies.set("token", token, { httpOnly: true });
 
     return response;
-  } catch (error: any) {
 
-    console.log("error occured in login controller");
+
+  } catch (error) {
+    console.error("Login route error:", error);
+  
+    let errorMessage = "An error occurred while performing login operation";
+  
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+  
     return NextResponse.json(
-      {
-        error:
-          error.message || "An error occured while performing login operation",
-      },
+      { error: errorMessage },
       { status: 500 }
     );
   }
+  
 }

@@ -1,8 +1,15 @@
 import nodemailer from "nodemailer";
 import { User } from "@/models/userModels";
 import bcryptjs from "bcryptjs";
+import { ObjectId } from "mongoose";
 
-export async function sendMail({ reciverMail, emailType, userId }: any) {
+interface sendMailProp{
+  reciverMail: string;
+  emailType: string;
+  userId: ObjectId;
+}
+
+export async function sendMail({ reciverMail, emailType, userId }: sendMailProp) {
   try {
     const hashedToken = await bcryptjs.hash(userId.toString(), 10);
 
@@ -45,7 +52,8 @@ export async function sendMail({ reciverMail, emailType, userId }: any) {
 
     const mailResponse = await transport.sendMail(mailOption);
     return mailResponse;
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error) {
+    if(error instanceof Error) throw new Error(error.message);
+    else throw new Error("unknown error occured in mailer.ts")
   }
 }

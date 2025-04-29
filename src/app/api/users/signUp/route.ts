@@ -64,11 +64,18 @@ export async function POST(request: NextRequest) {
     },{status: 201});
 
 
-  } catch (error: any) {
-    console.log("error in backend")
+  } catch (error) {
+    console.log("Error in backend");
+  
+    let errorMessage = "An error occurred during registration";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+  
     return NextResponse.json(
-        { error: error.message || "An error occured during registration" },
-        { status: 500 }
+      { error: errorMessage },
+      { status: 500 }
     );
   }
+  
 };

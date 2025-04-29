@@ -11,7 +11,7 @@ interface FormData {
   password: string;
 }
 
-function sign() {
+function Sign() {
   const router = useRouter();
   const [formData, setformData] = useState<FormData>({
     username: "",
@@ -52,8 +52,8 @@ function sign() {
         setformData({ username: "", email: "", password: "" });
         router.push(`/verifyReq/${response.data.user.email}`);
       }
-    } catch (error: any) {
-      console.log("handleSubmit:: SignUp::", error.response.data.error);
+    } catch (error) {
+      console.log("handleSubmit:: SignUp::", error);
     }
   };
 
@@ -144,4 +144,4 @@ function sign() {
   );
 }
 
-export default sign;
+export default Sign;

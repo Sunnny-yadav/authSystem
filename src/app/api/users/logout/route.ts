@@ -10,9 +10,19 @@ export async function GET(){
         response.cookies.set("token","",{httpOnly:true});
 
         return response;
-    } catch (error: any) {
-        return NextResponse.json({
-            error:error.message || "An error occured in the logout controller"
-        },{status:500});
-    }
+    } catch (error) {
+        console.error("LogOut route error:", error);
+      
+        let errorMessage = "An error occurred while performing logout operation";
+      
+        if (error instanceof Error) {
+          errorMessage = error.message;
+        }
+      
+        return NextResponse.json(
+          { error: errorMessage },
+          { status: 500 }
+        );
+      }
+      
 }

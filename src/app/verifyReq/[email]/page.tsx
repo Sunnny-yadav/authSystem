@@ -3,13 +3,14 @@
 import React from 'react';
 import Image from 'next/image';
 
-interface emailVerifyProp {
+interface EmailVerifyProps {
   params: {
     email: string;
   };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-const VerificationPending = ({params}:emailVerifyProp ) => {
+const VerificationPending = ({ params }: EmailVerifyProps) => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-black p-4">
       <div className="flex w-full max-w-4xl flex-col md:flex-row items-center justify-between">
@@ -35,7 +36,6 @@ const VerificationPending = ({params}:emailVerifyProp ) => {
                 <span className="text-purple-400 mr-2">•</span>
                 verify if you typed your email correctly
               </li>
-              
             </ul>
           </div>
         </div>
@@ -43,10 +43,10 @@ const VerificationPending = ({params}:emailVerifyProp ) => {
         <div className="md:w-1/2 flex justify-center">
           <div className="relative">
             <div className="w-[500px]">
-              <Image 
-                src="/email.png" 
-                alt="Email verification" 
-                width={300} 
+              <Image
+                src="/email.png"
+                alt="Email verification"
+                width={300}
                 height={220}
                 className="w-full h-auto"
               />

@@ -1,16 +1,21 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 
-interface EmailVerifyProps {
-  params: {
-    email: string;
-  };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
+const VerificationPending = () => {
+  const searchParams = useSearchParams();
+  const [email, setEmail] = useState<string>("");
+  
+  useEffect(() => {
+    // Get email from search params
+    const emailParam = searchParams.get('email');
+    if (emailParam) {
+      setEmail(emailParam);
+    }
+  }, [searchParams]);
 
-const VerificationPending = ({ params }: EmailVerifyProps) => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-black p-4">
       <div className="flex w-full max-w-4xl flex-col md:flex-row items-center justify-between">
@@ -21,7 +26,7 @@ const VerificationPending = ({ params }: EmailVerifyProps) => {
           
           <p className="text-lg text-gray-300 mb-6">
             Check the confirmation email at <br />
-            <span className="font-semibold text-white">{params.email.replace("%40","@")}</span>
+            <span className="font-semibold text-white">{email}</span>
           </p>
           
           <div className="mb-6">

@@ -50,7 +50,8 @@ function Sign() {
       if (response.data.success) {
         console.log("signUp succeess", response.data);
         setformData({ username: "", email: "", password: "" });
-        router.push(`/verifyReq/${response.data.user.email}`);
+        // router.push(`/verifyReq/${response.data.user.email}`);
+        router.push(`/verifyReq?email=${encodeURIComponent(response.data.user.email)}`);
       }
     } catch (error) {
       console.log("handleSubmit:: SignUp::", error);

@@ -1,18 +1,12 @@
 "use client"
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+
 
 function Profile() {
   const router = useRouter()
-  const [userInfo, setuserInfo] = useState("")
 
-
-  const getuserData = async ()=>{
-    const response = await axios.get('/api/users/me')
-    setuserInfo(response.data.data._id)
-  };
 
 
   const logout = async () => {
